@@ -26,7 +26,7 @@ const theme = createMuiTheme({
 			root: {
 				padding: '20px 10px',
 				margin: '10px',
-				backgroundColor: '#fff', // 5d737e
+				backgroundColor: '#fff',
 			},
 		},
 		MuiButton: {

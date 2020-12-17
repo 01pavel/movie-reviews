@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -6,34 +6,22 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import { FILMS_URL } from '../../../config';
+import { ContextApp } from '../../../contexts/ContextApp';
+import { getInfoRequest, getInfoSuccess, setError } from '../../../actions/actions';
 
-function FilmInfo({ selectedFilmNumber, setSnackbarMessage }) {
-	const [filmInfo, setFilmInfo] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
-
-	useEffect(() => {
-		if (selectedFilmNumber === null) {
-			return;
-		}
-
-		const fetchFilmInfo = async () => {
-			try {
-				setIsLoading(true);
-				const response = await fetch(`${FILMS_URL}${selectedFilmNumber}`);
-				const data = await response.json();
-				setFilmInfo(data);
-			} catch (err) {
-				setFilmInfo(null);
-				setSnackbarMessage(err.message);
-			} finally {
-				setIsLoading(false)
+function FilmInfo() {
+	const {
+		state: {
+			films: {
+				selectedFilmNumber,
+				filmInfo,
+				isLoadingInfo,
 			}
-		};
-		fetchFilmInfo();
+		},
+		dispatch
+	} = useContext(ContextApp);
 
-	}, [selectedFilmNumber, setSnackbarMessage]);
-
-	if (isLoading) {
+	if (isLoadingInfo) {
 
 		return <Typography variant="h5">
 			loading...

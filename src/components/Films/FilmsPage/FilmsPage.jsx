@@ -1,52 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+	useEffect,
+	useContext
+} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import FilmsList from '../FilmsList/FilmsList';
 import FilmInfo from '../FilmInfo/FilmInfo';
 import { FILMS_URL } from '../../../config';
+import { getFilmsRequest, getFilmsSuccess, setError } from '../../../actions/actions';
+import { ContextApp } from '../../../contexts/ContextApp';
 
-function FilmsPage({ setSnackbarMessage }) {
-	const [filmsList, setFilmsList] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [selectedFilmNumber, setSelectedFilmNumber] = useState(null);
+import styles from './FilmsPage.module.css';
+
+function FilmsPage() {
+	const {
+		state: {
+			films: {
+				isLoading,
+				items: films,
+			}
+		},
+		dispatch
+	} = useContext(ContextApp);
 
 	useEffect(() => {
+		if (films.length) {
+			return;
+		}
+
 		const fetchFilms = async () => {
 			try {
-				setIsLoading(true);
+				dispatch(getFilmsRequest(true));
 				const response = await fetch(FILMS_URL);
 				const data = await response.json();
-				setFilmsList(data.results);
+				dispatch(getFilmsSuccess(data.results));
 			} catch (err) {
-				setSnackbarMessage(err.message);
+				dispatch(setError(err.message));
 			} finally {
-				setIsLoading(false)
+				dispatch(getFilmsRequest(false));
 			}
 		};
 		fetchFilms();
-	}, [setSnackbarMessage]);
+	}, []);
 
 	return (
-		<Box display="flex">
-			<Box width="20%">
+		<Box className={styles.filmsContainer}>
+			<Box className={styles.filmsListContainer}>
 				{isLoading ? <Typography variant="h5">
 					loading...
 				</Typography> :
-					<FilmsList films={filmsList}
-						selectedFilmNumber={selectedFilmNumber}
-						setSelectedFilmNumber={setSelectedFilmNumber}
-					/>}
+					<FilmsList films={films} />}
 			</Box>
-			<Box width="80%"
-				display="flex"
-				justifyContent="center"
-				alignItems="center"
-				flexDirection="column"
-			>
-				<FilmInfo selectedFilmNumber={selectedFilmNumber}
-					setSnackbarMessage={setSnackbarMessage}
-				/>
+			<Box className={styles.filmInfoContainer}>
+				<FilmInfo />
 			</Box>
 		</Box >
 	);

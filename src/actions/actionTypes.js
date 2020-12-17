@@ -1,0 +1,7 @@
+export const GET_FILMS_REQUEST = 'GET_FILMS_REQUEST';
+export const GET_FILMS_SUCCESS = 'GET_FILMS_SUCCESS';
+
+export const GET_INFO_REQUEST = 'GET_INFO_REQUEST';
+export const GET_INFO_SUCCESS = 'GET_INFO_SUCCESS';
+
+export const SET_ERROR = 'SET_ERROR';
