@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import { FILMS_URL } from '../../../config';
-import { ContextApp } from '../../../contexts/ContextApp';
+import { AppContext } from '../../../contexts/AppContext';
 import { getInfoRequest, getInfoSuccess, setError } from '../../../actions/actions';
 
 function FilmInfo() {
@@ -19,7 +19,7 @@ function FilmInfo() {
 			}
 		},
 		dispatch
-	} = useContext(ContextApp);
+	} = useContext(AppContext);
 
 	if (isLoadingInfo) {
 
@@ -39,11 +39,7 @@ function FilmInfo() {
 					</Typography>
 				</CardContent>
 			</Card>
-			<Link to={{
-				pathname: "/review",
-				state: { episodeId: filmInfo.episode_id }
-			}}
-			>
+			<Link to="/review">
 				<Button>Review</Button>
 			</Link>
 		</>;

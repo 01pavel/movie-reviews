@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { ContextApp } from '../../../contexts/ContextApp';
+import { AppContext } from '../../../contexts/AppContext';
 import { getInfoRequest, getInfoSuccess, setError } from '../../../actions/actions';
 import { FILMS_URL } from '../../../config';
 
@@ -14,7 +14,7 @@ function FilmsList({ films }) {
 			}
 		},
 		dispatch
-	} = useContext(ContextApp);
+	} = useContext(AppContext);
 
 	const selectFilm = async (filmNumber) => {
 		try {

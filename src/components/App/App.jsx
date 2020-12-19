@@ -14,7 +14,7 @@ import {
 import Films from '../Films/Films';
 import Review from '../Review/Review';
 
-import { ContextApp } from '../../contexts/ContextApp';
+import { AppContext } from '../../contexts/AppContext';
 import { appReducer, initialState } from '../../reducers/appReducer.js';
 import { setError } from '../../actions/actions';
 
@@ -22,7 +22,7 @@ function App() {
 	const [state, dispatch] = useReducer(appReducer, initialState);
 
 	return (
-		<ContextApp.Provider value={{ dispatch, state }}>
+		<AppContext.Provider value={{ dispatch, state }}>
 			<Router>
 				<Container maxWidth="lg">
 					<Paper classes={{
@@ -63,7 +63,7 @@ function App() {
 					</Paper>
 				</Container>
 			</Router>
-		</ContextApp.Provider>
+		</AppContext.Provider>
 	);
 }
 

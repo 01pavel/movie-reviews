@@ -14,6 +14,18 @@ export const initialState = {
 		filmInfo: null,
 		isLoadingInfo: false,
 	},
+	review: {
+		username: '',
+		usernameError: '',
+		usernameIsDirty: false,
+		email: '',
+		emailError: '',
+		emailIsDirty: false,
+		review: '',
+		reviewError: '',
+		reviewIsDirty: false,
+		formIsValid: false,
+	},
 	error: '',
 };
 

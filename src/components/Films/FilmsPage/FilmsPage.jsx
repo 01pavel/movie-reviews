@@ -9,7 +9,7 @@ import FilmsList from '../FilmsList/FilmsList';
 import FilmInfo from '../FilmInfo/FilmInfo';
 import { FILMS_URL } from '../../../config';
 import { getFilmsRequest, getFilmsSuccess, setError } from '../../../actions/actions';
-import { ContextApp } from '../../../contexts/ContextApp';
+import { AppContext } from '../../../contexts/AppContext';
 
 import styles from './FilmsPage.module.css';
 
@@ -22,7 +22,7 @@ function FilmsPage() {
 			}
 		},
 		dispatch
-	} = useContext(ContextApp);
+	} = useContext(AppContext);
 
 	useEffect(() => {
 		if (films.length) {
