@@ -2,8 +2,7 @@ import React, {
 	useEffect,
 	useContext
 } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { Grid, Typography } from '@material-ui/core';
 
 import FilmsList from '../FilmsList/FilmsList';
 import FilmInfo from '../FilmInfo/FilmInfo';
@@ -11,7 +10,6 @@ import { FILMS_URL } from '../../../config';
 import { getFilmsRequest, getFilmsSuccess, setError } from '../../../actions/actions';
 import { AppContext } from '../../../contexts/AppContext';
 
-import styles from './FilmsPage.module.css';
 
 function FilmsPage() {
 	const {
@@ -29,6 +27,9 @@ function FilmsPage() {
 			return;
 		}
 
+		/**
+		 * Fetches the films list
+		 */
 		const fetchFilms = async () => {
 			try {
 				dispatch(getFilmsRequest(true));
@@ -45,17 +46,19 @@ function FilmsPage() {
 	}, []);
 
 	return (
-		<Box className={styles.filmsContainer}>
-			<Box className={styles.filmsListContainer}>
-				{isLoading ? <Typography variant="h5">
-					loading...
-				</Typography> :
-					<FilmsList films={films} />}
-			</Box>
-			<Box className={styles.filmInfoContainer}>
+		<Grid container>
+			<Grid container item xs={4} md={3}>
+				{isLoading ?
+					<Typography variant="h5">
+						loading...
+					</Typography> :
+					<FilmsList films={films} />
+				}
+			</Grid>
+			<Grid container item alignItems="flex-start" justify="center" xs={8} md={9}>
 				<FilmInfo />
-			</Box>
-		</Box >
+			</Grid>
+		</Grid >
 	);
 }
 

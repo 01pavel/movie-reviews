@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import { AppContext } from '../../../contexts/AppContext';
 import { getInfoRequest, getInfoSuccess, setError } from '../../../actions/actions';
 import { FILMS_URL } from '../../../config';
@@ -16,6 +14,10 @@ function FilmsList({ films }) {
 		dispatch
 	} = useContext(AppContext);
 
+	/**
+	 * Set the selected film and loads its info
+	 * @param filmNumber - number of the film 
+	 */
 	const selectFilm = async (filmNumber) => {
 		try {
 			dispatch(getInfoRequest({

@@ -1,0 +1,16 @@
+.reviewForm {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	width: 100%;
+	justify-content: center;
+}
+.field {
+	height: 90px;
+}
+.fieldReview {
+	height: 140px;
+}
+.sendBtn {
+	height: 50px;
+}

@@ -4,4 +4,9 @@ export const GET_FILMS_SUCCESS = 'GET_FILMS_SUCCESS';
 export const GET_INFO_REQUEST = 'GET_INFO_REQUEST';
 export const GET_INFO_SUCCESS = 'GET_INFO_SUCCESS';
 
+export const SET_FIELD_VALUE = 'SET_FIELD_VALUE';
+export const SET_IS_DIRTY = 'SET_IS_DIRTY';
+export const SET_IS_FORM_VALID = 'SET_IS_FORM_VALID';
+
 export const SET_ERROR = 'SET_ERROR';
+export const RESET_STATE = 'RESET_STATE';

@@ -3,7 +3,11 @@ import {
 	GET_FILMS_SUCCESS,
 	GET_INFO_REQUEST,
 	GET_INFO_SUCCESS,
+	SET_FIELD_VALUE,
+	SET_IS_DIRTY,
+	SET_IS_FORM_VALID,
 	SET_ERROR,
+	RESET_STATE,
 } from "../actions/actionTypes";
 
 export const initialState = {
@@ -24,7 +28,7 @@ export const initialState = {
 		review: '',
 		reviewError: '',
 		reviewIsDirty: false,
-		formIsValid: false,
+		isFormValid: false,
 	},
 	error: '',
 };
@@ -67,11 +71,43 @@ export const appReducer = (state, action) => {
 				}
 			};
 		}
+		case SET_FIELD_VALUE: {
+			const { field, value, error } = action.payload;
+			return {
+				...state,
+				review: {
+					...state.review,
+					[field]: value,
+					[`${field}Error`]: error,
+				}
+			}
+		}
+		case SET_IS_DIRTY: {
+			return {
+				...state,
+				review: {
+					...state.review,
+					[`${action.payload}IsDirty`]: true,
+				}
+			}
+		}
+		case SET_IS_FORM_VALID: {
+			return {
+				...state,
+				review: {
+					...state.review,
+					isFormValid: action.payload,
+				}
+			};
+		}
 		case SET_ERROR:
 			return {
 				...state,
 				error: action.payload,
 			};
+		case RESET_STATE: {
+			return initialState;
+		}
 		default:
 			return state
 	}
